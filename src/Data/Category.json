@@ -1,0 +1,30 @@
+[
+    {
+        "CategoryId": 0, 
+        "CategoryName": "All" 
+    },
+    {
+        "CategoryId": 1, 
+        "CategoryName": "Action" 
+    },
+    {
+        "CategoryId": 2, 
+        "CategoryName": "Adventure" 
+    },
+    {
+        "CategoryId": 3, 
+        "CategoryName": "Fighting" 
+    },
+    {
+        "CategoryId": 4, 
+        "CategoryName": "Racing" 
+    },
+    {
+        "CategoryId": 5, 
+        "CategoryName": "Role-Playing" 
+    },
+    {
+        "CategoryId": 6, 
+        "CategoryName": "Survival Horror" 
+    }    
+]
