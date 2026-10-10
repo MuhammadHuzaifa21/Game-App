@@ -2,13 +2,17 @@ import { useParams } from "react-router-dom"
 import Game from '../Data/Games.json'
 import GameCard from "../Components/GameCard";
 import { useState } from "react";
-import { Cursor } from "mongoose";
+import { useDispatch, useSelector } from "react-redux";
+import  {inc, dec, reset} from '../counterSlice'
 
 export default function GameDetail() {
+    const count = useSelector((state) => state.counter.count);
+    const dispatch = useDispatch();
+
     const {id} = useParams();
     const detail = Game.find((item) => item.Id == id);
 
-    const [count, setCount] = useState(1);
+    //const [count, setCount] = useState(1);
 
     if (!detail) {
         return <h2>Game not found.</h2>;
@@ -60,6 +64,20 @@ export default function GameDetail() {
                         {/* Quantity */}
                         <div className="d-flex align-item-center mb-3">
                             {count > 1 ?
+                                <button className="btn btn-outline-secondary" onClick={() => dispatch(dec())}> - </button>
+                                : <button className="btn btn-outline-secondary"> - </button>
+                            }
+                            <span className="mx-3 mt-2">
+                                <strong>{count}</strong>
+                            </span>
+
+                            {count < detail.Stock ?
+                                <button className="btn btn-outline-secondary" onClick={() => dispatch(inc())}> + </button>
+                                : <button className="btn btn-md btn-outline-secondary"> + </button>
+                            }
+                        </div>
+                        {/* <div className="d-flex align-item-center mb-3">
+                            {count > 1 ?
                                 <button className="btn btn-outline-secondary" onClick={() => setCount(count - 1)}> - </button>
                                 : <button className="btn btn-outline-secondary"> - </button>
                             }
@@ -71,7 +89,7 @@ export default function GameDetail() {
                                 <button className="btn btn-outline-secondary" onClick={() => setCount(count + 1)}> + </button>
                                 : <button className="btn btn-md btn-outline-secondary"> + </button>
                             }
-                        </div>
+                        </div> */}
 
                         <p>
                             <strong>In Stock:</strong> {detail.Stock}
