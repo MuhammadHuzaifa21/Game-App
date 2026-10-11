@@ -1,16 +1,97 @@
-# React + Vite
+# Game Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A modern gaming catalog app built with React and Vite. Browse a curated collection of popular titles, filter by category, view game details, and explore a clean storefront-style interface.
 
-Currently, two official plugins are available:
+## Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+https://game-app-psi-lemon.vercel.app
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Responsive gaming homepage with hero section and featured highlights
+- Browse all games in a searchable/filterable catalog
+- Filter games by category
+- View detailed information for each title
+- Modern UI built with Bootstrap and custom styling
+- Routing for Home, All Games, About, Contact, and Game Detail pages
+- State management with Redux Toolkit
 
-## Expanding the Oxlint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- React 19
+- Vite
+- React Router
+- Redux Toolkit
+- Bootstrap 5
+- JavaScript
+
+## Getting Started
+
+### Prerequisites
+
+Make sure you have Node.js installed on your machine.
+
+### Installation
+
+1. Clone the repository
+   ```bash
+   git clone <your-repository-url>
+   cd GameApp
+   ```
+
+2. Install dependencies
+   ```bash
+   npm install
+   ```
+
+3. Start the development server
+   ```bash
+   npm run dev
+   ```
+
+4. Open the local URL shown in the terminal (usually http://localhost:5173)
+
+## Available Scripts
+
+```bash
+npm run dev     # start the app in development mode
+npm run build   # create a production build
+npm run preview # preview the production build locally
+npm run lint    # run lint checks
+```
+
+## Project Structure
+
+```text
+GameApp/
+├── public/
+├── src/
+│   ├── Components/
+│   ├── Data/
+│   ├── Pages/
+│   ├── App.jsx
+│   ├── main.jsx
+│   ├── store.js
+│   └── index.css
+├── index.html
+├── package.json
+├── vite.config.js
+├── README.md
+└── .gitignore
+```
+
+## Main Pages
+
+- Home: landing page with featured games and carousel
+- All Games: full catalog with category filters
+- Game Detail: detailed single-game information page
+- About: project and platform overview
+- Contact: contact page
+
+## Notes
+
+This project is designed as a gaming showcase app and demo storefront, ideal for learning React routing, state management, and UI composition.
+
+## License
+
+This project is for educational/demo purposes unless otherwise specified by the repository owner.
