@@ -7,3 +7,6 @@ For this step, update AllGames.jsx to store the response with setGames(result.da
 Then update GameCard.jsx to read the API’s camelCase fields: id, image, name, and price instead of Id, Image, Name, and Price. Keep the category lookup as it is for now; it can still use the local category JSON.
 
 Once those changes are in, the cards and category filter should use the fetched games. We can connect categories to the API as the next step.
+
+
+https://game-app-psi-lemon.vercel.app
