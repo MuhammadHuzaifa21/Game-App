@@ -5,7 +5,7 @@ const gamesSchema = new mongoose.Schema({
     image: String,
     name: String,
     price: Number,
-    category: String,
+    categoryId: Number,
     platform: String,
     developer: String,
     publisher: String,

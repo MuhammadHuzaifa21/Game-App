@@ -1,30 +1,30 @@
 [
     {
-        "CategoryId": 0, 
-        "CategoryName": "All" 
+        "categoryId": 0, 
+        "categoryName": "All" 
     },
     {
-        "CategoryId": 1, 
-        "CategoryName": "Action" 
+        "categoryId": 1, 
+        "categoryName": "Action" 
     },
     {
-        "CategoryId": 2, 
-        "CategoryName": "Adventure" 
+        "categoryId": 2, 
+        "categoryName": "Adventure" 
     },
     {
-        "CategoryId": 3, 
-        "CategoryName": "Fighting" 
+        "categoryId": 3, 
+        "categoryName": "Fighting" 
     },
     {
-        "CategoryId": 4, 
-        "CategoryName": "Racing" 
+        "categoryId": 4, 
+        "categoryName": "Racing" 
     },
     {
-        "CategoryId": 5, 
-        "CategoryName": "Role-Playing" 
+        "categoryId": 5, 
+        "categoryName": "Role-Playing" 
     },
     {
-        "CategoryId": 6, 
-        "CategoryName": "Survival Horror" 
+        "categoryId": 6, 
+        "categoryName": "Survival Horror" 
     }    
 ]

@@ -1,19 +1,36 @@
-import { useState } from 'react';
-import GameCard from '../Components/GameCard'
-import Category from '../Data/Category.json'
-import Game from '../Data/Games.json'
+import { useState, useEffect } from 'react';
+import GameCard from '../Components/GameCard';
+import Category from '../Data/Category.json';
+import Game from '../Data/Games.json';
+import axios from 'axios';
 
 export default function AllGames() {
-    const [cat, setCat] = useState("All");
+    const [categoryId, setCategoryId] = useState(0);
+    const [games, setGames] = useState([]);
 
-    let selectedCategory = cat;
     let gameToShow;
 
-    if (selectedCategory === "All") {
+    if (categoryId === 0) {
         gameToShow = Game
     } else {
-        gameToShow = Game.filter(game => game.Category === selectedCategory);
+        gameToShow = Game.filter(game => game.categoryId === categoryId);
     }
+
+    const fetchGames = async () => {
+        try {
+            const result = await axios.get('http://localhost:3000/games');
+
+            if (result.data.data) {
+                console.log(result.data.data);    
+            }
+        } catch (error) {
+            console.error("Could not load games.", error)
+        }
+    }
+
+    useEffect(() => {
+        fetchGames();
+    }, [])
 
     return (
         <>
@@ -24,13 +41,13 @@ export default function AllGames() {
                     <div className="d-flex justify-content-center gap-4">
 
                         {Category.map((item) => (
-                            <div className="col-auto" key={item.CategoryName}>
+                            <div className="col-auto" key={item.categoryId}>
                                 <button
                                     type="button"
                                     className="btn btn-outline-dark"
-                                    onClick={() => setCat(item.CategoryName)}
+                                    onClick={() => setCategoryId(item.categoryId)}
                                 >
-                                    {item.CategoryName}
+                                    {item.categoryName}
                                 </button>
                             </div>
                         ))}

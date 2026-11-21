@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { getCategoryName } from "../Data/category";
 
 export default function GameCard({ prop }) {
     return (
@@ -17,7 +18,7 @@ export default function GameCard({ prop }) {
                             </div>
                             <h5 className="card-title">{prop.Name}</h5>
                             <p className="card-text text-muted"><strong>Rs: {prop.Price}</strong></p>
-                            <p className="card-text text-muted"><strong>Category:</strong> {prop.Category}</p>
+                            <p className="card-text text-muted"><strong>Category:</strong> {getCategoryName(prop.categoryId)}</p>
                         </div>
                     </div>
                 </Link>

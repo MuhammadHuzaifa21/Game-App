@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import Game from '../Data/Games.json'
 import GameCard from "../Components/GameCard";
+import { getCategoryName } from "../Data/category";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import  {inc, dec, reset} from '../Redux/counterSlice'
@@ -17,6 +18,8 @@ export default function GameDetail() {
     if (!detail) {
         return <h2>Game not found.</h2>;
     }
+
+    const categoryName = getCategoryName(detail.categoryId);
 
     return (
         <>
@@ -42,7 +45,7 @@ export default function GameDetail() {
                         <h3>Rs. {detail.Price}</h3>
 
                         <p>
-                            <strong>Category:</strong> {detail.Category}
+                            <strong>Category:</strong> {categoryName}
                         </p>
 
                         <p>
@@ -123,7 +126,7 @@ export default function GameDetail() {
                         <tbody>
                             <tr>
                                 <th>Category</th>
-                                <td>{detail.Category}</td>
+                                <td>{categoryName}</td>
                             </tr>
                             
                             <tr>
