@@ -1,1 +1,9 @@
 npm i bootstrap react-router-dom axios
+
+Your Axios request is working: the console shows all 48 games. One thing to fix before those games appear in the UI: fetchGames only logs them. It never calls setGames, and gameToShow still uses the static Game import.
+
+For this step, update AllGames.jsx to store the response with setGames(result.data.data) and filter games instead of Game.
+
+Then update GameCard.jsx to read the API’s camelCase fields: id, image, name, and price instead of Id, Image, Name, and Price. Keep the category lookup as it is for now; it can still use the local category JSON.
+
+Once those changes are in, the cards and category filter should use the fetched games. We can connect categories to the API as the next step.
