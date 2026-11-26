@@ -8,6 +8,7 @@ import Footer from "./Components/Footer";
 import GameDetail from "./Pages/GameDetail";
 import AllGames from "./Pages/AllGames";
 import ManageGames from "./Pages/ManageGames";
+import AddGames from "./Pages/AddGames";
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
 
               <Route path="/allGames" element={<AllGames />} />
               <Route path="/gameDetail/:id" element={<GameDetail />} />
-              <Route path="/manageGames" element={<ManageGames />} />
+              <Route path="/manageGames" element={<ManageGames />} />              
+              <Route path="/addGame" element={<AddGames />} />
               
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />

@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
-import GameCard from '../Components/GameCard';
+// import GameCard from '../Components/GameCard';
+import GameCardTest from '../Components/GameCardTest';
 // import Category from '../Data/Category.json';
 // import Game from '../Data/Games.json';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function ManageGames() {
     const [categories, setCategories] = useState([]);
@@ -78,11 +80,24 @@ export default function ManageGames() {
                             </div>
                         ))}
                     </div>
+
+                    <div className="row d-flex justify-content-center mb-2 mt-3">
+                        <div className="col-lg-12" >
+                            <Link to="/addGame" style={{ textDecoration: "none" }}>
+                                <div className="card h-100 shadow-sm hover-card ">
+                                    <div className="card-body text-center text-success">
+                                        <h1 className="card-title">Add New Game</h1>
+                                        <p className="card-text text-muted">Click here to add a new game.</p>
+                                    </div>
+                                </div>
+                            </Link>
+                        </div>
+                    </div>
                     
                     {/* Games */}
-                    {gameToShow.map((game) => (
-                        <GameCard key={game._id} prop={game} />
-                    ))}
+                    {/* {gameToShow.map((game) => (
+                        <GameCardTest key={game._id} prop={game} />
+                    ))} */}
                 </div>               
                 
             </div>
