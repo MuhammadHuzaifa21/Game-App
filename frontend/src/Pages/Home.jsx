@@ -1,9 +1,28 @@
 import { Link } from "react-router-dom";
-import hero from "../Data/Hero.json";
-import Game from "../Data/Games.json";
+// import hero from "../Data/Hero.json";
+// import Game from "../Data/Games.json";
 import GameCard from "../Components/GameCard";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function Home() {
+  const [games, setGames] = useState([]);
+
+  const fetchGames = async () => {
+    try {
+      const result = await axios.get('http://localhost:3000/games');
+
+      setGames(result.data.data);
+
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  useEffect(() => {
+    fetchGames();
+  }, [])
+
   return (
     <>
       {/* Hero Section with Gaming Background */}
@@ -46,11 +65,25 @@ function Home() {
                 className="carousel slide"
                 data-bs-ride="carousel"
               >
-                <div className="carousel-inner rounded-4 shadow-lg">
+                {/* <div className="carousel-inner rounded-4 shadow-lg">
                   {hero.map((item, index) => (
                     <div className={`carousel-item ${index === 0 ? "active" : ""}`} key={index}>
                       <img
                         src={item.Image}
+                        className="d-block w-100"
+                        alt="Gaming 1"
+                        style={{ height: "250px", objectFit: "cover" }}
+                      />
+                    </div>
+                  ))}
+                </div> */}
+
+                <div className="carousel-inner rounded-4 shadow-lg">                 
+                  {games.filter((item) => item.id < 6)
+                  .map((item) => (
+                    <div className={`carousel-item ${item.id === 1 ? "active" : ""}`} key={item._id}>
+                      <img
+                        src={item.image}
                         className="d-block w-100"
                         alt="Gaming 1"
                         style={{ height: "250px", objectFit: "cover" }}
@@ -90,7 +123,21 @@ function Home() {
                   className="carousel-indicators"
                   style={{ bottom: "-30px" }}
                 >
-                  <button
+                  {games.filter((item) => item.id < 6)
+                  .map((item) => {
+
+                    <button
+                      key={item._id}
+                      type="button"
+                      data-bs-target="#smallCarousel"
+                      className="active"                    
+                      aria-current="true"
+                      data-bs-slide-to={item.id}
+                      aria-label="Slide"
+                    ></button>
+                  
+                  })}
+                  {/* <button
                     type="button"
                     data-bs-target="#smallCarousel"
                     className="active"                    
@@ -109,7 +156,7 @@ function Home() {
                     data-bs-target="#smallCarousel"
                     data-bs-slide-to="2"
                     aria-label="Slide 3"
-                  ></button>
+                  ></button> */}
                 </div>
               </div>
             </div>
@@ -120,9 +167,9 @@ function Home() {
       {/* Features Section */}
       <div className="container">
         <div className="row g-3 mt-2">
-          {Game.filter((item) => item.Id < 9)
+          {games.filter((item) => item.id < 9)
             .map((item) => (            
-              <GameCard prop={item} />
+              <GameCard prop={item} key={item.id} />
             ))}
         </div>
       </div>

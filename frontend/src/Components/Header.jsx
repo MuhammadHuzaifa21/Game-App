@@ -43,6 +43,11 @@ function Header() {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link className="nav-link fw-semibold mx-2" to="/manageGames">
+                  Manage
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link fw-semibold mx-2" to="/about">
                   About
                 </Link>

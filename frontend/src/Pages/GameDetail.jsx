@@ -1,19 +1,36 @@
 import { useParams } from "react-router-dom"
-import Game from '../Data/Games.json'
+// import Game from '../Data/Games.json'
 import GameCard from "../Components/GameCard";
 import { getCategoryName } from "../Data/category";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import  {inc, dec, reset} from '../Redux/counterSlice'
+import axios from "axios";
 
 export default function GameDetail() {
+    const [games, setGames] = useState([]);
+
     const count = useSelector((state) => state.counter.count);
     const dispatch = useDispatch();
 
     const {id} = useParams();
-    const detail = Game.find((item) => item.Id == id);
+    const detail = games.find((item) => item.id == id);
 
     //const [count, setCount] = useState(1);
+
+    const fetchGames = async () => {
+        try {
+            const result = await axios.get("http://localhost:3000/games");
+
+            setGames(result.data.data);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    useEffect(() => {
+        fetchGames();
+    }, [])
 
     if (!detail) {
         return <h2>Game not found.</h2>;
@@ -27,41 +44,41 @@ export default function GameDetail() {
                 <div className="row">
                     {/* Game Image */}
                     <div className="col-md-6 border text-center">
-                        <img src={detail.Image} className="img-fluid rounded" alt={detail.Name} 
+                        <img src={detail.image} className="img-fluid rounded" alt={detail.name} 
                             style={{maxWidth: "400px"}} />
                     </div>
 
                     {/* Game Detail */}
                     <div className="col-md-6 mt-5">
-                        <h1>{detail.Name}</h1>
+                        <h1>{detail.name}</h1>
 
                         <div className="mb-3|">
                             ⭐⭐⭐⭐⭐
                             <span className="ms-2">
-                                {detail.Rating} ({detail.ReviewCount} Reviews)
+                                {detail.rating} ({detail.reviewCount} Reviews)
                             </span>
                         </div>
 
-                        <h3>Rs. {detail.Price}</h3>
+                        <h3>Rs. {detail.price}</h3>
 
                         <p>
                             <strong>Category:</strong> {categoryName}
                         </p>
 
                         <p>
-                            <strong>Platform:</strong> {detail.Platform}
+                            <strong>Platform:</strong> {detail.platform}
                         </p>
                         
                         <p>
-                            <strong>Developer:</strong> {detail.Developer}
+                            <strong>Developer:</strong> {detail.developer}
                         </p>
                         
                         <p>
-                            <strong>Publisher:</strong> {detail.Publisher}
+                            <strong>Publisher:</strong> {detail.publisher}
                         </p>
                         
                         <p>
-                            <strong>Release Date:</strong> {detail.ReleaseDate}
+                            <strong>Release Date:</strong> {detail.releaseDate}
                         </p>
                         
                         {/* Quantity */}
@@ -74,7 +91,7 @@ export default function GameDetail() {
                                 <strong>{count}</strong>
                             </span>
 
-                            {count < detail.Stock ?
+                            {count < detail.stock ?
                                 <button className="btn btn-outline-secondary" onClick={() => dispatch(inc())}> + </button>
                                 : <button className="btn btn-md btn-outline-secondary"> + </button>
                             }
@@ -95,7 +112,7 @@ export default function GameDetail() {
                         </div> */}
 
                         <p>
-                            <strong>In Stock:</strong> {detail.Stock}
+                            <strong>In Stock:</strong> {detail.stock}
                         </p>
 
                         {/* Add To Cart */}
@@ -114,7 +131,7 @@ export default function GameDetail() {
                 <div className="mt-5">
                     <h2>Description</h2>
                     <p>
-                        {detail.Description}
+                        {detail.description}
                     </p>
                 </div>
 
@@ -131,22 +148,22 @@ export default function GameDetail() {
                             
                             <tr>
                                 <th>Platform</th>
-                                <td>{detail.Platform}</td>
+                                <td>{detail.platform}</td>
                             </tr>
                             
                             <tr>
                                 <th>Developer</th>
-                                <td>{detail.Developer}</td>
+                                <td>{detail.developer}</td>
                             </tr>
                             
                             <tr>
                                 <th>Publisher</th>
-                                <td>{detail.Publisher}</td>
+                                <td>{detail.publisher}</td>
                             </tr>
 
                             <tr>
                                 <th>Release Date</th> 
-                                <td>{detail.ReleaseDate}</td> 
+                                <td>{detail.releaseDate}</td> 
                             </tr>
                         </tbody>
                     </table>
@@ -160,11 +177,11 @@ export default function GameDetail() {
                         )
                     )} */}
 
-                    {[...Game]
+                    {[...games]
                         .sort(() => Math.random() - 0.5)
                         .slice(0, 4)
                         .map((item) => (
-                        <GameCard key={item.Id} prop={item} />
+                        <GameCard key={item.id} prop={item} />
                     ))}
                 </div>
 

@@ -1,28 +1,45 @@
 import { useState, useEffect } from 'react';
 import GameCard from '../Components/GameCard';
-import Category from '../Data/Category.json';
-import Game from '../Data/Games.json';
+// import Category from '../Data/Category.json';
+// import Game from '../Data/Games.json';
 import axios from 'axios';
 
 export default function AllGames() {
-    const [categoryId, setCategoryId] = useState(0);
+    const [categories, setCategories] = useState([]);
+    const [selectedCategoryId, setSelectedCategoryId] = useState(0);
     const [games, setGames] = useState([]);
 
-    let gameToShow;
+    const gameToShow =
+        selectedCategoryId === 0
+            ? games
+            : games.filter((game) => game.categoryId === selectedCategoryId); 
 
-    if (categoryId === 0) {
-        gameToShow = Game
-    } else {
-        gameToShow = Game.filter(game => game.categoryId === categoryId);
+    const fetchCateogries = async () => {
+        try {
+            const result = await axios.get("http://localhost:3000/category")
+
+            setCategories(result.data.data)
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
+    // Fetch Games
     const fetchGames = async () => {
         try {
             const result = await axios.get('http://localhost:3000/games');
 
-            if (result.data.data) {
-                console.log(result.data.data);    
+            if (!result) {
+                return (
+                    <div className='container'>
+                        <h1>No Games Found</h1>
+                    </div>
+                )
             }
+                        
+            setGames(result.data.data);
+            fetchCateogries();
+
         } catch (error) {
             console.error("Could not load games.", error)
         }
@@ -39,13 +56,22 @@ export default function AllGames() {
                     <h1>Category</h1>
 
                     <div className="d-flex justify-content-center gap-4">
+                        <div className="col-auto" key= {0}>
+                            <button
+                                type="button"
+                                className="btn btn-outline-dark"
+                                onClick={() => setSelectedCategoryId(0)}
+                            >
+                                All
+                            </button>
+                        </div>
 
-                        {Category.map((item) => (
+                        {categories.map((item) => (
                             <div className="col-auto" key={item.categoryId}>
                                 <button
                                     type="button"
                                     className="btn btn-outline-dark"
-                                    onClick={() => setCategoryId(item.categoryId)}
+                                    onClick={() => setSelectedCategoryId(item.categoryId)}
                                 >
                                     {item.categoryName}
                                 </button>
@@ -55,7 +81,7 @@ export default function AllGames() {
                     
                     {/* Games */}
                     {gameToShow.map((game) => (
-                        <GameCard key={game.Id} prop={game} />
+                        <GameCard key={game._id} prop={game} />
                     ))}
                 </div>               
                 
